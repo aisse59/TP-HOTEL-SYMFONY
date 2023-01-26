@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire d'inscription
+{% endblock %}
+
+{% block menuDroite %}
+	{% if app.user %}
+		<div class="d-flex justify-content-center bg-secondary">
+			{{app.user.prenom}}
+			{{app.user.nom}}
+			<h2>
+				Votre statut:
+				{{app.user.role}}<h2></div>
+			{% else %}
+				<h1>S'enregistrer</h1>
+
+				<div class="d-flex justify-content-center ">
+					<div class="form-group  bg-body rounded ">
+						{{ form_start(registrationForm) }}
+						{{ form_end(registrationForm) }}
+						<a href="{{ path('app_login') }}">
+							<br>
+							<br>
+							<button class="btn btn-lg btn-dark " type="button">
+								Déja inscrit ?
+							</button>
+						</a>
+					</div>
+				</div>
+			{% endif %}
+		{% endblock %}

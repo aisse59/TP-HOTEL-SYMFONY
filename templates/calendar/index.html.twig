@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes réservations
+{% endblock %}
+{# {% block style %}
+<style>
+body{
+    background: white;
+}
+</style>
+{% endblock %} #}
+
+{% block style %}
+    <style>
+    .corps {
+	    margin: 0;
+	    background: white  !important; 
+    }
+    </style>
+{% endblock %}
+
+{% block body %}
+	<h1>Mes réservations</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Numéro de réservation</th>
+				<th>Début du séjour</th>
+				<th>Fin du séjour </th>
+				<th>Éditer ma reservation </th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for calendar in calendars %}
+				<tr>
+					<td>{{ calendar.id }}</td>
+					<td>{{ calendar.Start ? calendar.Start|date('d-m-Y H:i:s') : '' }}</td>
+					<td>{{ calendar.End ? calendar.End|date('d-m-Y H:i:s') : '' }}</td>
+					<td>
+						<a href="{{ path('app_calendar_show', {'id': calendar.id}) }}">Aperçu de ma réservation</a>
+						<a href="{{ path('app_calendar_edit', {'id': calendar.id}) }}">Modifier ma réservation</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="4">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_calendar_new') }}">Nouvelle réservation</a>
+{% endblock %}

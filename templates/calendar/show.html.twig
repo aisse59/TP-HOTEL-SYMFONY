@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Calendar{% endblock %}
+
+{% block style %}
+    <style>
+    .corps {
+	    background: white  !important; 
+    }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h1 class="mt-5">Calendar</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Numéro de réservation</th>
+                <td>{{ calendar.id }}</td>
+            </tr>
+            <tr>
+                <th>Début du séjour</th>
+                <td>{{ calendar.Start ? calendar.Start|date('d-m-Y H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Fin du séjour</th>
+                <td>{{ calendar.End ? calendar.End|date('d-m-Y H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_calendar_index') }}">Retour à la liste des réservations</a>
+
+    <a href="{{ path('app_calendar_edit', {'id': calendar.id}) }}">Éditer</a>
+
+    {{ include('calendar/_delete_form.html.twig') }}
+{% endblock %}
